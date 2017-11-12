@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import CreateListItem from './CreatListItem';
+import FontAwesome from 'react-fontawesome';
+// import faStyles from 'font-awesome/css/font-awesome.css';
 
 const appStyle = {
     textAlign: 'center',
@@ -10,7 +12,9 @@ const headerStyle = {
     backgroundColor: '#222',
     height: '100px',
     padding: '20px',
-    color: 'white'
+    color: 'white',
+    fontFamily: 'Roboto',
+    fontWeight: '900',
 };
 
 const appTitle = {
@@ -29,8 +33,11 @@ const buttonStyle = {
     height: '3em',
     width: '10em',
     borderRadius: '3px',
-    backgroundColor: 'blue',
+    backgroundColor: '#33cccc',
     cursor: 'pointer',
+    fontFamily: 'Roboto',
+    fontWeight: '900',
+
 };
 
 const inputStyle = {
@@ -55,15 +62,48 @@ const listItemStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
     position: 'relative',
-    top: '70px'
+    top: '70px',
 };
 
-let array = ['Cookie', 'Milk'];
+const outsideInputStyle = {
+    position: 'relative',
+    left: '15px',
+    bottom: '15px'
+};
 
-const listItems = array.map((number) =>
-    <li>{number}</li>
-);
+const borderStyle ={
+    position: 'relative',
+    top: '60px',
+    left: '33%',
+    height: '500px',
+    width: '500px',
+    border: '1px solid #85e0e0',
+    borderRadius: '40px',
+    backgroundColor: '#85e0e0',
+    opacity: '0.5',
+};
+
+const divItemsStyle = {
+    position: 'relative',
+    right: '100px',
+    bottom: '500px',
+    fontFamily: 'Roboto',
+    fontWeight: '500',
+};
+
+function lineOut(width) {
+    const lineOutStyles = {
+        width: width,
+        height: '20px',
+        backgroundColor: 'purple'
+
+    };
+
+    return lineOutStyles;
+}
+
 
 
 class App extends Component {
@@ -71,10 +111,12 @@ class App extends Component {
         super();
         this.state = {
             items: [],
-            input: ''
+            input: '',
+            lineOutWidth: 0
         };
         this.updateInput = this.updateInput.bind(this);
         this.createNewItem = this.createNewItem.bind(this);
+        this.crossOut = this.crossOut.bind(this);
     }
 
     updateInput(event) {
@@ -90,14 +132,27 @@ class App extends Component {
 
         this.setState({
             items: items,
-            input: ''
+            input: '',
+            lineOutWidth: 0
         })
     }
 
+    crossOut() {
+        this.setState({
+            lineOutWidth: 20
+        })
+    }
+
+    handleKeyPress(target) {
+        if(target.charCode==13){
+            alert('Enter clicked!!!');
+        }
+
+    }
 
     render() {
         let divItems = this.state.items.map((item, index) => {
-           return <li key={index}> {item}</li>
+           return <li onClick={this.crossOut} key={index}> {item}</li>
         });
 
         return (
@@ -111,17 +166,18 @@ class App extends Component {
                 <div style={listItemAndInputAndButtonContainer}>
                     <div style={inputAndButtonContainerStyle}>
                         <div>
-                            <input id="input" value={this.state.value} onChange={this.updateInput} style={inputStyle} placeholder="Item"/>
+                            <input id="input" autoFocus  value={this.state.input} onKeyPress={this.handleKeyPress} onChange={this.updateInput} style={inputStyle} placeholder="Example: Go buy milk"/>
                         </div>
 
-                        <div style={buttonStyle} onClick={this.createNewItem}>Add Item</div>
+                        <div style={buttonStyle} type="submit" onClick={this.createNewItem}>Add Items</div>
                     </div>
 
-                    <div>
-                        <ul>
+                    <div style={borderStyle}></div>
+
+                    <div style={listItemStyle}>
+                        <ul style={divItemsStyle}>
                             {divItems}
                         </ul>
-                        {this.state.input}
                     </div>
                 </div>
             </div>
