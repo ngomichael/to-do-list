@@ -8,7 +8,7 @@ class CreateListItem extends Component {
     render() {
         return(
             <div>
-                <li style={listItemStyle}>Hey</li>
+                <li style={listItemStyle}>{this.props.listItem}</li>
             </div>
         )
     }

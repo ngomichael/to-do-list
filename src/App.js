@@ -59,10 +59,47 @@ const listItemStyle = {
     top: '70px'
 };
 
+let array = ['Cookie', 'Milk'];
+
+const listItems = array.map((number) =>
+    <li>{number}</li>
+);
+
 
 class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            items: [],
+            input: ''
+        };
+        this.updateInput = this.updateInput.bind(this);
+        this.createNewItem = this.createNewItem.bind(this);
+    }
+
+    updateInput(event) {
+        this.setState({
+            input: event.target.value
+        });
+    }
+
+    createNewItem() {
+        let value = this.state.input;
+        let items = this.state.items;
+        items.push(value);
+
+        this.setState({
+            items: items,
+            input: ''
+        })
+    }
+
 
     render() {
+        let divItems = this.state.items.map((item, index) => {
+           return <li key={index}> {item}</li>
+        });
+
         return (
             <div>
                 <div style={appStyle}>
@@ -74,13 +111,17 @@ class App extends Component {
                 <div style={listItemAndInputAndButtonContainer}>
                     <div style={inputAndButtonContainerStyle}>
                         <div>
-                            <input id="input" style={inputStyle} placeholder="Item"/>
+                            <input id="input" value={this.state.value} onChange={this.updateInput} style={inputStyle} placeholder="Item"/>
                         </div>
 
-                        <div style={buttonStyle} >Add Items</div>
+                        <div style={buttonStyle} onClick={this.createNewItem}>Add Item</div>
                     </div>
-                    <div style={listItemStyle}>
-                        <CreateListItem />
+
+                    <div>
+                        <ul>
+                            {divItems}
+                        </ul>
+                        {this.state.input}
                     </div>
                 </div>
             </div>
