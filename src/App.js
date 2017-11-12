@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import airplane from './planes.png';
 import CreateListItem from './CreatListItem';
 import FontAwesome from 'react-fontawesome';
 // import faStyles from 'font-awesome/css/font-awesome.css';
@@ -33,7 +34,7 @@ const buttonStyle = {
     height: '3em',
     width: '10em',
     borderRadius: '3px',
-    backgroundColor: '#33cccc',
+    backgroundColor: '#02BEC4',
     cursor: 'pointer',
     fontFamily: 'Roboto',
     fontWeight: '900',
@@ -81,14 +82,13 @@ const borderStyle ={
     width: '500px',
     border: '1px solid #85e0e0',
     borderRadius: '40px',
-    backgroundColor: '#85e0e0',
-    opacity: '0.5',
+    backgroundColor: '#BADDD6',
 };
 
 const divItemsStyle = {
     position: 'relative',
     right: '100px',
-    bottom: '500px',
+    bottom: '700px',
     fontFamily: 'Roboto',
     fontWeight: '500',
 };
@@ -104,7 +104,25 @@ function lineOut(width) {
     return lineOutStyles;
 }
 
+function colorChange() {
+    // this.setState({
+    //     lineOutWidth: 20
+    // })
+    const changeColor = {
+        backgroundColor: 'red',
+    };
 
+    return changeColor
+}
+
+const airplaneStyle = {
+    opacity: '0.8',
+    position: 'relative',
+    left: '1000px',
+    bottom: '90px',
+    height: '200px',
+    width: '400px'
+};
 
 class App extends Component {
     constructor() {
@@ -116,7 +134,7 @@ class App extends Component {
         };
         this.updateInput = this.updateInput.bind(this);
         this.createNewItem = this.createNewItem.bind(this);
-        this.crossOut = this.crossOut.bind(this);
+        // this.changeColor = this.changeColor.bind(this);
     }
 
     updateInput(event) {
@@ -137,22 +155,17 @@ class App extends Component {
         })
     }
 
-    crossOut() {
-        this.setState({
-            lineOutWidth: 20
-        })
-    }
 
-    handleKeyPress(target) {
-        if(target.charCode==13){
-            alert('Enter clicked!!!');
-        }
-
-    }
+    // handleKeyPress(target) {
+    //     if(target.charCode==13){
+    //         alert('Enter clicked!!!');
+    //     }
+    //
+    // }
 
     render() {
         let divItems = this.state.items.map((item, index) => {
-           return <li onClick={this.crossOut} key={index}> {item}</li>
+           return <li onClick={colorChange} key={index}> {item}</li>
         });
 
         return (
@@ -166,14 +179,15 @@ class App extends Component {
                 <div style={listItemAndInputAndButtonContainer}>
                     <div style={inputAndButtonContainerStyle}>
                         <div>
-                            <input id="input" autoFocus  value={this.state.input} onKeyPress={this.handleKeyPress} onChange={this.updateInput} style={inputStyle} placeholder="Example: Go buy milk"/>
+                            <input id="input" autoFocus  value={this.state.input} onKeyPress={this.handleKeyPress}
+                                   onChange={this.updateInput} style={inputStyle} placeholder="Example: Go buy milk"/>
                         </div>
 
                         <div style={buttonStyle} type="submit" onClick={this.createNewItem}>Add Items</div>
                     </div>
 
                     <div style={borderStyle}></div>
-
+                    <img style={airplaneStyle} src={airplane}/>
                     <div style={listItemStyle}>
                         <ul style={divItemsStyle}>
                             {divItems}
