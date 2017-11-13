@@ -87,10 +87,12 @@ const borderStyle ={
 
 const divItemsStyle = {
     position: 'relative',
-    right: '100px',
+    left: '50px',
     bottom: '700px',
     fontFamily: 'Roboto',
     fontWeight: '500',
+    width: '500px',
+    height: '550px',
 };
 
 function lineOut(width) {
@@ -188,6 +190,7 @@ class App extends Component {
 
                     <div style={borderStyle}></div>
                     <img style={airplaneStyle} src={airplane}/>
+
                     <div style={listItemStyle}>
                         <ul style={divItemsStyle}>
                             {divItems}
