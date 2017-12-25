@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import airplane from './planes.png';
-import CreateListItem from './CreatListItem';
-import FontAwesome from 'react-fontawesome';
-// import faStyles from 'font-awesome/css/font-awesome.css';
 
 const appStyle = {
     textAlign: 'center',
@@ -38,7 +35,6 @@ const buttonStyle = {
     cursor: 'pointer',
     fontFamily: 'Roboto',
     fontWeight: '900',
-
 };
 
 const inputStyle = {
@@ -68,12 +64,6 @@ const listItemStyle = {
     top: '70px',
 };
 
-const outsideInputStyle = {
-    position: 'relative',
-    left: '15px',
-    bottom: '15px'
-};
-
 const borderStyle ={
     position: 'relative',
     top: '60px',
@@ -92,30 +82,7 @@ const divItemsStyle = {
     fontFamily: 'Roboto',
     fontWeight: '500',
     width: '500px',
-    height: '550px',
 };
-
-function lineOut(width) {
-    const lineOutStyles = {
-        width: width,
-        height: '20px',
-        backgroundColor: 'purple'
-
-    };
-
-    return lineOutStyles;
-}
-
-function colorChange() {
-    // this.setState({
-    //     lineOutWidth: 20
-    // })
-    const changeColor = {
-        backgroundColor: 'red',
-    };
-
-    return changeColor
-}
 
 const airplaneStyle = {
     opacity: '0.8',
@@ -136,15 +103,16 @@ class App extends Component {
         };
         this.updateInput = this.updateInput.bind(this);
         this.createNewItem = this.createNewItem.bind(this);
-        // this.changeColor = this.changeColor.bind(this);
     }
 
+    //updates the value of the input on every change
     updateInput(event) {
         this.setState({
             input: event.target.value
         });
     }
 
+    //when 'Add Items' button is clicked a new item is added to the list
     createNewItem() {
         let value = this.state.input;
         let items = this.state.items;
@@ -157,17 +125,9 @@ class App extends Component {
         })
     }
 
-
-    // handleKeyPress(target) {
-    //     if(target.charCode==13){
-    //         alert('Enter clicked!!!');
-    //     }
-    //
-    // }
-
     render() {
         let divItems = this.state.items.map((item, index) => {
-           return <li onClick={colorChange} key={index}> {item}</li>
+           return <li key={index}> {item}</li>
         });
 
         return (
